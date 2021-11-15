@@ -1,15 +1,17 @@
-/**
+/*
  * 
  */
 package it.unibo.oop.lab.simplegui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.TextField;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,7 +26,7 @@ import javax.swing.JPanel;
 public class MiniGUI {
 
     private static final String TITLE = "A very simple GUI application";
-    private static final int PROPORTION = 5;
+    private static final int PROPORTION = 3;
     private final Random rng = new Random();
     private final JFrame frame = new JFrame(TITLE);
 
@@ -38,13 +40,19 @@ public class MiniGUI {
         canvas.add(write, BorderLayout.CENTER);
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        /*
-         * Handlers
-         */
+        //01.01
+        final JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        panel.add(write, BorderLayout.CENTER);
+        frame.setContentPane(panel);
+        //01.03
+        final TextField result = new TextField();
+        panel.add(result, BorderLayout.NORTH);
+        //button
         write.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                System.out.println(rng.nextInt());
+                result.setText(String.valueOf(rng.nextInt()));
             }
         });
     }
